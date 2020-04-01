@@ -22,6 +22,7 @@ gem 'webpacker', '~> 4.0'
 # gem 'image_processing', '~> 1.2'
 
 group :development, :test do
+  gem 'rspec-rails', '~> 4.0.0'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
