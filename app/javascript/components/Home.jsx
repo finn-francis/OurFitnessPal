@@ -1,11 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Base from './main/Base';
 
-class Home extends React.Component {
-  componentDidMount() {
-    this.props.setAreaTitle("Home")
-  }
-
+class Home extends Base {
   render() {
     return (
       <div className="primary-color d-flex align-items-center justify-content-center">

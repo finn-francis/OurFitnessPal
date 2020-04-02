@@ -1,13 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Route, Switch, Link } from "react-router-dom";
-import Exercises from '../components/admin/exercises/Index'
+import Base from './admin/Base';
+import Exercises from '../components/admin/exercises/Index';
 
 
-class Admin extends React.Component {
-  componentDidMount() {
-    this.props.setAreaTitle('Admin Area')
-  }
-
+class Admin extends Base {
   render() {
     return (
       <div className="primary-color align-items-center justify-content-center">
