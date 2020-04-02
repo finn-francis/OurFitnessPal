@@ -10,6 +10,29 @@ const routes = [
   {path: '/admin/exercises', component: AdminExercises}
 ]
 class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      areaTitle: null
+    }
+  }
+
+  setAreaTitle(title) {
+    this.setState({areaTitle: title})
+  }
+
+  areaTitle() {
+    if (this.state.areaTitle) {
+      return (
+        <div className="col-12">
+          <h2>{this.state.areaTitle}</h2>
+        </div>
+      )
+    } else {
+      return <></>
+    }
+  }
+
   render() {
     return (
       <div className='container'>
@@ -20,7 +43,7 @@ class App extends React.Component {
           {this.areaTitle()}
           <Switch>
             {routes.map(({path, component: C}, i) => (
-              <Route key={i} path={path} exact render={(props) => <C {...props} />} />
+              <Route key={i} path={path} exact render={(props) => <C {...props} setAreaTitle={this.setAreaTitle.bind(this)} />} />
             ))}
           </Switch>
           <footer></footer>
