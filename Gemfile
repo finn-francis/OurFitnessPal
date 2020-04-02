@@ -8,6 +8,7 @@ ruby '2.6.5'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'jbuilder', '~> 2.7'
 gem 'pg', '>= 0.18', '< 2.0'
+gem 'pry-rails'
 gem 'puma', '~> 4.1'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 gem 'sass-rails', '>= 6'
@@ -29,7 +30,7 @@ group :development, :test do
   gem 'rubocop-rails', require: false
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'pry-byebug', platforms: %i[mri mingw x64_mingw]
 end
 
 group :development do
