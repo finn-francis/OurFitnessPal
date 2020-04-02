@@ -7,7 +7,7 @@ class Base extends React.Component {
 
   componentDidMount() {
     this.props.setAreaTitle('Admin Area')
-    // this.props.setIsAdminArea(true)
+    this.props.setArea('admin')
   }
 }
 

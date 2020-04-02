@@ -7,6 +7,7 @@ class Base extends React.Component {
 
   componentDidMount() {
     this.props.setAreaTitle(null)
+    this.props.setArea('main')
   }
 }
 

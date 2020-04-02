@@ -2,7 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Home from "../components/Home";
 import Admin from "../components/Admin";
-import AdminExercises from '../components/admin/exercises/Index'
+import AdminNavbar from "../components/admin/NavBar";
+import AdminExercises from '../components/admin/exercises/Index';
 
 const routes = [
   {path: '/', component: Home},
@@ -13,12 +14,17 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      areaTitle: null
+      areaTitle: null,
+      area: 'admin'
     }
   }
 
   setAreaTitle(title) {
     this.setState({areaTitle: title})
+  }
+
+  setArea(area) {
+    this.setState({area: area})
   }
 
   areaTitle() {
@@ -41,9 +47,21 @@ class App extends React.Component {
             <Link to="/" className="btn btn-lg custom-button" role="button"><h1>Our Fitness Pal</h1></Link>
           </nav>
           {this.areaTitle()}
+          <AdminNavbar area={this.state.area} />
           <Switch>
             {routes.map(({path, component: C}, i) => (
-              <Route key={i} path={path} exact render={(props) => <C {...props} setAreaTitle={this.setAreaTitle.bind(this)} />} />
+              <Route
+                key={i} path={path} exact
+                render={(props) => {
+                  return (
+                    <C
+                      {...props}
+                      setAreaTitle={this.setAreaTitle.bind(this)}
+                      setArea={this.setArea.bind(this)}
+                    />
+                  )
+                }}
+              />
             ))}
           </Switch>
           <footer></footer>
