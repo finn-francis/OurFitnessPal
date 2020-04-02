@@ -4,6 +4,11 @@ import Home from "../components/Home";
 import Admin from "../components/Admin";
 import AdminExercises from '../components/admin/exercises/Index'
 
+const routes = [
+  {path: '/', component: Home},
+  {path: '/admin', component: Admin},
+  {path: '/admin/exercises', component: AdminExercises}
+]
 class App extends React.Component {
   render() {
     return (
@@ -12,10 +17,11 @@ class App extends React.Component {
           <nav>
             <Link to="/" className="btn btn-lg custom-button" role="button"><h1>Our Fitness Pal</h1></Link>
           </nav>
+          {this.areaTitle()}
           <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/admin" exact component={Admin} />
-            <Route path="/admin/exercises" exact component={AdminExercises} />
+            {routes.map(({path, component: C}, i) => (
+              <Route key={i} path={path} exact render={(props) => <C {...props} />} />
+            ))}
           </Switch>
           <footer></footer>
         </Router>
