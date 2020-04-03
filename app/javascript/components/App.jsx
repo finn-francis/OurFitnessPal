@@ -1,11 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./Home";
 import Admin from "./Admin";
 import AdminNavbar from "./admin/NavBar";
 import AdminExercises from './admin/exercises/Index';
 import Login from './devise/sessions/New';
-import LogoutButton from './devise/sessions/Destroy';
+import Navbar from './Navbar';
 
 const routes = [
   {path: '/', component: Home},
@@ -46,11 +46,7 @@ class App extends React.Component {
     return (
       <div className='container'>
         <Router>
-          <nav>
-            <Link to="/" className="btn btn-lg custom-button" role="button"><h1>Our Fitness Pal</h1></Link>
-            <Link to="login" className='btn btn-info' role='button'>Sign in</Link>
-            <LogoutButton />
-          </nav>
+          <Navbar />
           {this.areaTitle()}
           <AdminNavbar area={this.state.area} />
           <Switch>
