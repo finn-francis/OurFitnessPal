@@ -7,8 +7,7 @@ class New extends Base {
     super(props)
     this.state = {
       email: "",
-      password: "",
-      password_confirmation: ""
+      password: ""
     }
 
     this.onChange = this.onChange.bind(this)
@@ -22,12 +21,12 @@ class New extends Base {
   onSubmit(event) {
     event.preventDefault()
     const url = "/api/v1/login"
-    const { email, password, password_confirmation } = this.state
+    const { email, password } = this.state
 
-    if (email.length == 0 || password.length == 0 || password_confirmation.length == 0)
+    if (email.length == 0 || password.length == 0)
       return
 
-    const body = { user: { email, password, password_confirmation } }
+    const body = { user: { email, password } }
     const token = document.querySelector('meta[name="csrf-token"]').content
 
     fetch(url, {
@@ -44,7 +43,7 @@ class New extends Base {
         }
         throw new Error("Network response was not ok.")
       })
-      .then(_response => this.props.history.push('/'))
+      .then(_response => window.location.href = '/')
       .catch(error => console.log(error.message))
   }
 
@@ -72,17 +71,6 @@ class New extends Base {
                   type="password"
                   name="password"
                   id="password"
-                  className="form-control"
-                  required
-                  onChange={this.onChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="password_confirmation">Password Confirmation</label>
-                <input
-                  type="password"
-                  name="password_confirmation"
-                  id="password_confirmation"
                   className="form-control"
                   required
                   onChange={this.onChange}
