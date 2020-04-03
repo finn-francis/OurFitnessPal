@@ -6,6 +6,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.5'
 
 gem 'bootsnap', '>= 1.4.2', require: false
+gem 'devise'
+gem 'devise-jwt', '~> 0.6.0'
 gem 'jbuilder', '~> 2.7'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'pry-rails'
@@ -23,6 +25,7 @@ gem 'webpacker', '~> 4.0'
 # gem 'image_processing', '~> 1.2'
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'faker'
   gem 'rspec-rails', '~> 4.0.0'
   gem 'rubocop', require: false
