@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import Home from "../components/Home";
-import Admin from "../components/Admin";
-import AdminNavbar from "../components/admin/NavBar";
-import AdminExercises from '../components/admin/exercises/Index';
-import Login from '../components/devise/sessions/New';
-import LogoutButton from '../components/devise/sessions/Destroy';
+import Home from "./Home";
+import Admin from "./Admin";
+import AdminNavbar from "./admin/NavBar";
+import AdminExercises from './admin/exercises/Index';
+import Login from './devise/sessions/New';
+import LogoutButton from './devise/sessions/Destroy';
 
 const routes = [
   {path: '/', component: Home},
