@@ -22,7 +22,8 @@ class App extends React.Component {
     super(props)
     this.state = {
       areaTitle: null,
-      area: 'admin'
+      area: 'admin',
+      currentUser: null
     }
   }
 
@@ -32,6 +33,10 @@ class App extends React.Component {
 
   setArea(area) {
     this.setState({area: area})
+  }
+
+  setCurrentUser(user) {
+    this.setState({currentUser: user})
   }
 
   areaTitle() {
@@ -50,9 +55,9 @@ class App extends React.Component {
     return (
       <div className='container'>
         <Router>
-          <Navbar />
+          <Navbar currentUser={this.state.currentUser} />
           {this.areaTitle()}
-          <AdminNavbar area={this.state.area} />
+          <AdminNavbar area={this.state.area} currentUser={this.state.currentUser} />
           <Switch>
             {routes.map(({path, component: C}, i) => (
               <Route
@@ -61,8 +66,10 @@ class App extends React.Component {
                   return (
                     <C
                       {...props}
+                      currentUser={this.state.currentUser}
                       setAreaTitle={this.setAreaTitle.bind(this)}
                       setArea={this.setArea.bind(this)}
+                      setCurrentUser={this.setCurrentUser.bind(this)}
                     />
                   )
                 }}
