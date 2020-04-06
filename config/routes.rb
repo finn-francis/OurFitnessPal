@@ -12,6 +12,11 @@ Rails.application.routes.draw do
                sessions: 'api/v1/sessions',
                registrations: 'api/v1/registrations'
              }
+  namespace :api do
+    namespace :v1 do
+      resources :homepage, only: :index
+    end
+  end
   root 'homepage#index'
   namespace :api do
     namespace :v1 do
