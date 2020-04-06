@@ -1,6 +1,7 @@
 import React from "react";
 import Base from "../Base";
 import { Link } from "react-router-dom";
+import { defaultHeaders } from "../../../utils/request";
 
 class New extends Base {
   constructor(props) {
@@ -27,14 +28,10 @@ class New extends Base {
       return
 
     const body = { user: { email, password } }
-    const token = document.querySelector('meta[name="csrf-token"]').content
 
     fetch(url, {
       method: "POST",
-      headers: {
-        "X-CSRF-Token": token,
-        "Content-Type": "application/json"
-      },
+      headers: defaultHeaders(),
       body: JSON.stringify(body)
     })
       .then(response => {
