@@ -15,6 +15,13 @@ ActiveRecord::Schema.define(version: 2020_04_02_142828) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "exercises", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "jwt_blacklist", force: :cascade do |t|
     t.string "jti", null: false
     t.index ["jti"], name: "index_jwt_blacklist_on_jti"

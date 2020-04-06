@@ -13,5 +13,10 @@ Rails.application.routes.draw do
                registrations: 'api/v1/registrations'
              }
   root 'homepage#index'
+  namespace :api do
+    namespace :v1 do
+      resources :exercises, only: %i[index show]
+    end
+  end
   get '/*path' => 'homepage#index'
 end
