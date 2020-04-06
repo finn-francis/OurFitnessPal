@@ -33,7 +33,7 @@ class Index extends React.Component {
     ));
     const noExercises = (
       <div className="vw-100 vh-50 d-flex align-items-center justify-content-center">
-        <h4>
+        <h4 className='no-exercises'>
           No exercises
         </h4>
       </div>
