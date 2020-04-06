@@ -32,6 +32,7 @@ describe('Index', () => {
       let exerciseData = [{id: 1, name: 'Squat'}, {id: 2, name: 'Bench Press'}, {id: 3, name: 'Dead Lift'}]
       container.setState({exercises: exerciseData})
       expect(container.find('.card-body').length).toEqual(exerciseData.length);
+      expect(container.find('.btn').length).toEqual(exerciseData.length);
       expect(container.find('.no-exercises').length).toEqual(0);
     })
   })

@@ -5,6 +5,7 @@ import Navbar from './Navbar';
 import Admin from "./Admin";
 import AdminNavbar from "./admin/NavBar";
 import AdminExercises from './admin/exercises/Index';
+import AdminExercisesShow  from './admin/exercises/Show';
 import Login from './devise/sessions/New';
 import Signup from './devise/registrations/New';
 
@@ -12,6 +13,7 @@ const routes = [
   {path: '/', component: Home},
   {path: '/admin', component: Admin},
   {path: '/admin/exercises', component: AdminExercises},
+  {path: '/admin/exercises/:id', component: AdminExercisesShow},
   {path: '/login', component: Login},
   {path: '/signup', component: Signup}
 ]

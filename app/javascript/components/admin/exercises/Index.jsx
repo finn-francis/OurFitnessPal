@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 class Index extends React.Component {
   constructor(props) {
@@ -27,6 +28,9 @@ class Index extends React.Component {
         <div className="card mb-4">
           <div className="card-body">
             <h5 className="card-title">{exercise.name}</h5>
+            <Link to={`/admin/exercises/${exercise.id}`} className="btn custom-button">
+              View Exercise
+            </Link>
           </div>
         </div>
       </div>
