@@ -33,7 +33,7 @@ class New extends Base {
 
     fetch(url, {
       method: "POST",
-      headers: defaultHeaders,
+      headers: defaultHeaders(),
       body: JSON.stringify(body)
     })
       .then(response => {
