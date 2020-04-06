@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-describe 'POST /login', type: :request do
+describe 'POST /api/v1/login', type: :request do
   before do
     @user = User.create!(email: Faker::Internet.email, password: 'password', password_confirmation: 'password')
     @params = { user: { email: @user.email, password: @user.password } }
   end
-  let(:url) { '/login' }
+  let(:url) { '/api/v1/login' }
 
   context 'when params are correct' do
     before { post url, params: @params }
@@ -36,8 +36,8 @@ describe 'POST /login', type: :request do
   end
 end
 
-describe 'DELETE /logout', type: :request do
-  let(:url) { '/logout' }
+describe 'DELETE /api/v1/logout', type: :request do
+  let(:url) { '/api/v1/logout' }
 
   it 'returns 204, no content' do
     delete url

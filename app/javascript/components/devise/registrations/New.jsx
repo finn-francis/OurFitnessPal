@@ -7,7 +7,8 @@ class New extends Base {
     super(props)
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      password_confirmation: ""
     }
 
     this.onChange = this.onChange.bind(this)
@@ -20,13 +21,13 @@ class New extends Base {
 
   onSubmit(event) {
     event.preventDefault()
-    const url = "/api/v1/login"
-    const { email, password } = this.state
+    const url = "/api/v1/signup"
+    const { email, password, password_confirmation } = this.state
 
-    if (email.length == 0 || password.length == 0)
+    if (email.length == 0 || password.length == 0 || password_confirmation.length == 0)
       return
 
-    const body = { user: { email, password } }
+    const body = { user: { email, password, password_confirmation } }
     const token = document.querySelector('meta[name="csrf-token"]').content
 
     fetch(url, {
@@ -52,7 +53,7 @@ class New extends Base {
       <div className="mt-5">
         <div className="row">
           <div className="col-sm-12 col-lg-6 offset-lg-3">
-            <h1 className="font-weight-normal mb-5">Log in</h1>
+            <h1 className="font-weight-normal mb-5">Sign up</h1>
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <label htmlFor="email">Email</label>
@@ -76,8 +77,19 @@ class New extends Base {
                   onChange={this.onChange}
                 />
               </div>
+              <div className="form-group">
+                <label htmlFor="password_confirmation">Password Confirmation</label>
+                <input
+                  type="password"
+                  name="password_confirmation"
+                  id="password_confirmation"
+                  className="form-control"
+                  required
+                  onChange={this.onChange}
+                />
+              </div>
               <button type="submit" className="btn btn-success mt-3">
-                Sign in
+                Sign up
               </button>
               <Link to="/" className="btn btn-link mt-3">
                 Cancel

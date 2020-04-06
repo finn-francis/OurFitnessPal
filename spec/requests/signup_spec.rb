@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe 'POST /signup', type: :request do
-  let(:url) { '/signup' }
+RSpec.describe 'POST /api/v1/signup', type: :request do
+  let(:url) { '/api/v1/signup' }
   let(:params) { { user: { email: Faker::Internet.email, password: 'password' } } }
 
   context 'when user is unauthenticated' do
