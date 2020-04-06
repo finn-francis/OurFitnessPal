@@ -2,13 +2,21 @@
 
 require 'rails_helper'
 
-RSpec.describe Api::V1::ExercisesController do
+describe 'get /api/v1/exercises', type: :request do
+  include Warden::Test::Helpers
+
+  before do
+    Warden.test_mode!
+    @user = User.create!(email: Faker::Internet.email, password: 'password', password_confirmation: 'password')
+    login_as(@user, scope: 'user')
+  end
+
   describe '#index' do
-    let(:do_request) { get :index }
+    let(:url) { '/api/v1/exercises' }
 
     context 'there are no exercises' do
       it 'responds with an empty array' do
-        do_request
+        get url
         expect(response).to have_http_status('200')
         expect(response.body).to eq [].to_json
       end
@@ -20,7 +28,7 @@ RSpec.describe Api::V1::ExercisesController do
       end
 
       it 'responds with an all exercises ordered by name' do
-        do_request
+        get url
         expect(response).to have_http_status('200')
         expect(response.body).to eq @exercises
       end
