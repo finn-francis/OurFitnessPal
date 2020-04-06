@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   root 'homepage#index'
   namespace :api do
     namespace :v1 do
-      resources :exercises, only: [:index]
+      resources :exercises, only: %i[index show]
     end
   end
   get '/*path' => 'homepage#index'

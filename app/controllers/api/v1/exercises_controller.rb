@@ -6,6 +6,18 @@ module Api
       def index
         render json: Exercise.all.order(:name)
       end
+
+      def show
+        render json: exercise
+      end
+
+      private
+
+      def exercise
+        @exercise ||= Exercise.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        'Record not found'
+      end
     end
   end
 end
