@@ -2,6 +2,7 @@ import React from "react";
 import Base from "../Base";
 import { Link } from "react-router-dom";
 import { defaultHeaders } from "../../../utils/request";
+import { respondToSuccess } from "../../../utils/devise/response_handler";
 
 class New extends Base {
   constructor(props) {
@@ -41,7 +42,7 @@ class New extends Base {
         }
         throw new Error("Network response was not ok.")
       })
-      .then(_response => window.location.href = '/')
+      .then(response => respondToSuccess(this, response))
       .catch(error => console.log(error.message))
   }
 
