@@ -25,6 +25,7 @@ gem 'webpacker', '~> 4.0'
 # gem 'image_processing', '~> 1.2'
 
 group :development, :test do
+  gem 'cypress-on-rails', '~> 1.0'
   gem 'dotenv-rails'
   gem 'faker'
   gem 'rspec-rails', '~> 4.0.0'
@@ -46,6 +47,7 @@ group :development do
 end
 
 group :test do
+  gem 'database_cleaner-active_record'
   gem 'factory_bot'
   gem 'shoulda-matchers'
 end
