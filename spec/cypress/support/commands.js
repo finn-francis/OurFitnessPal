@@ -25,3 +25,7 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 // Cypress.Commands.add("login", (email, password) => { ... })
+
+Cypress.Commands.add('ar_command', (model) => {
+  return cy.app('ar_command', model)
+});
