@@ -1,5 +1,11 @@
 export const defaultHeaders = () => {
-  let token = document.querySelector('meta[name="csrf-token"]').content
+  let csrf = document.querySelector('meta[name="csrf-token"]')
+  let token
+  if (csrf) {
+    token = csrf.content
+  } else {
+    token = 'n/a'
+  }
 
   return (
     {

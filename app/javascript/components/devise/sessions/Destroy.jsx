@@ -18,7 +18,7 @@ const Destroy = (_props) => {
 
   return (
     <div>
-      <button className='btn btn-danger' onClick={handleClick}>Logout</button>
+      <button id='logout' className='btn btn-danger' onClick={handleClick}>Logout</button>
     </div>
   )
 }

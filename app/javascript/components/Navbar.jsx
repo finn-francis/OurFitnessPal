@@ -11,8 +11,8 @@ const Navbar = (props) => {
     } else {
       return (
         <div>
-          <Link to="login" className='btn btn-info' role='button'>Sign in</Link>
-          <Link to="signup" className='btn btn-info' role='button'>Sign up</Link>
+          <Link to="login" id='login' className='btn btn-info' role='button'>Sign in</Link>
+          <Link to="signup" id='signup' className='btn btn-info' role='button'>Sign up</Link>
         </div>
       )
     }
