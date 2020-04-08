@@ -7,7 +7,7 @@ module Api
 
       def create
         build_resource(sign_up_params)
-        resource.save
+        sign_in(resource) if resource.save
         render_resource(resource)
       end
     end

@@ -1,15 +1,11 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { defaultHeaders } from '../../../utils/request';
 
-const Destroy = (props) => {
+const Destroy = (_props) => {
   function handleClick(_event) {
-    let token = document.querySelector('meta[name="csrf-token"]').content
     fetch('api/v1/logout', {
       method: 'DELETE',
-      headers: {
-        "X-CSRF-Token": token,
-        "Content-Type": "application/json"
-      }
+      headers: defaultHeaders()
     })
       .then(response => {
         if (response.ok)
@@ -22,7 +18,7 @@ const Destroy = (props) => {
 
   return (
     <div>
-      <button className='btn btn-danger' onClick={handleClick}>Logout</button>
+      <button id='logout' className='btn btn-danger' onClick={handleClick}>Logout</button>
     </div>
   )
 }

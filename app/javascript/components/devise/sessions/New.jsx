@@ -1,6 +1,8 @@
 import React from "react";
 import Base from "../Base";
 import { Link } from "react-router-dom";
+import { defaultHeaders } from "../../../utils/request";
+import { respondToSuccess } from "../../../utils/devise/response_handler";
 
 class New extends Base {
   constructor(props) {
@@ -27,14 +29,10 @@ class New extends Base {
       return
 
     const body = { user: { email, password } }
-    const token = document.querySelector('meta[name="csrf-token"]').content
 
     fetch(url, {
       method: "POST",
-      headers: {
-        "X-CSRF-Token": token,
-        "Content-Type": "application/json"
-      },
+      headers: defaultHeaders(),
       body: JSON.stringify(body)
     })
       .then(response => {
@@ -43,7 +41,7 @@ class New extends Base {
         }
         throw new Error("Network response was not ok.")
       })
-      .then(_response => window.location.href = '/')
+      .then(response => respondToSuccess(this, response))
       .catch(error => console.log(error.message))
   }
 
