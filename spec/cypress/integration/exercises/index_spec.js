@@ -11,6 +11,10 @@ describe('Exercise index', () => {
     cy.url().should('eq', 'http://localhost:5002/')
   })
 
+  afterEach(() => {
+    cy.app('clean')
+  })
+
   it('should show a blank page if no exercises are present', () => {
     cy.visit('/admin/exercises')
     cy.get('.no-exercises').should('be.visible')

@@ -1,4 +1,4 @@
-describe('Exercise index', () => {
+describe('Exercise new', () => {
   beforeEach(() => {
     cy.app('clean')
     cy.ar_command(['Exercise', 'count']).should('eq', 0)
@@ -11,6 +11,10 @@ describe('Exercise index', () => {
     cy.get('form button').click()
     cy.url().should('eq', 'http://localhost:5002/')
     cy.visit('/admin/exercises/new')
+  })
+
+  afterEach(() => {
+    cy.app('clean')
   })
 
   it('should show a form to create an exercise', () => {

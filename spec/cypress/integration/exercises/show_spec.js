@@ -11,6 +11,10 @@ describe('Exercise show', () => {
     cy.url().should('eq', 'http://localhost:5002/')
   })
 
+  afterEach(() => {
+    cy.app('clean')
+  })
+
   it('should render the show page with the exercise attributes', () => {
     cy.appFactories([
       ['create', 'exercise']
