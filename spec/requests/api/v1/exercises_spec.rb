@@ -59,4 +59,47 @@ describe 'get /api/v1/exercises', type: :request do
       end
     end
   end
+
+  describe '#create' do
+    let(:url) { '/api/v1/exercises' }
+
+    context 'with valid params' do
+      before do
+        @initial_exercise_count = Exercise.count
+        params = { exercise: { name: Faker::Name.name, description: Faker::Lorem.paragraph } }
+        post url, params: params
+      end
+
+      it 'creates the record' do
+        expect(response).to have_http_status('200')
+        expect(Exercise.count).to eq(@initial_exercise_count + 1)
+      end
+
+      it 'responds with the new record as JSON' do
+        exercise = Exercise.last
+        parsed_response = JSON.parse(response.body)
+        expect(parsed_response['data']['id']).to eq exercise.id
+        expect(parsed_response['data']['name']).to eq exercise.name
+        expect(parsed_response['data']['description']).to eq exercise.description
+      end
+    end
+
+    context 'with invalid params(name blank)' do
+      before do
+        @initial_exercise_count = Exercise.count
+        params = { exercise: { description: Faker::Lorem.paragraph } }
+        post url, params: params
+      end
+
+      it 'does not create a record' do
+        expect(response).to have_http_status('200')
+        expect(Exercise.count).to eq(@initial_exercise_count)
+      end
+
+      it 'returns an error message' do
+        parsed_response = JSON.parse(response.body)
+        expect(parsed_response['data']['name']).to eq ['can\'t be blank']
+      end
+    end
+  end
 end

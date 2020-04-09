@@ -25,10 +25,10 @@ class Index extends React.Component {
     const { exercises } = this.state;
     const allExercises = exercises.map((exercise, index) => (
       <div key={index} className="col-md-6 col-lg-4">
-        <div className="card mb-4">
+        <div className="card mb-4 exercise">
           <div className="card-body">
             <h5 className="card-title">{exercise.name}</h5>
-            <Link to={`/admin/exercises/${exercise.id}`} className="btn custom-button">
+            <Link to={`/admin/exercises/${exercise.id}`} className="btn custom-button view-exercise">
               View Exercise
             </Link>
           </div>
@@ -47,6 +47,11 @@ class Index extends React.Component {
       <>
         <div className="py-5">
           <main className="container">
+            <div className="text-right mb-3">
+              <Link to="/admin/exercises/new" className="btn custom-button add-exercise">
+                Create New Exercise
+              </Link>
+            </div>
             <div className="row">
               {exercises.length > 0 ? allExercises : noExercises}
             </div>

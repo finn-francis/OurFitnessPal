@@ -8,15 +8,29 @@ module Api
       end
 
       def show
-        render json: exercise
+        render json: find_exercise
+      end
+
+      def create
+        exercise = Exercise.new(exercise_params)
+        if exercise.valid?
+          exercise.save
+          render json: { data: exercise, error: false }
+        else
+          render json: { data: exercise.errors, error: true }
+        end
       end
 
       private
 
-      def exercise
+      def find_exercise
         @exercise ||= Exercise.find(params[:id])
       rescue ActiveRecord::RecordNotFound
         'Record not found'
+      end
+
+      def exercise_params
+        params.require(:exercise).permit(:name, :description)
       end
     end
   end

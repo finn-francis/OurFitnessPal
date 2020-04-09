@@ -3,6 +3,10 @@ describe('Devise sessions', () => {
     cy.app('clean')
   })
 
+  afterEach(() => {
+    cy.app('clean')
+  })
+
   it('should allow the user to log in and out', () => {
     cy.ar_command(['User', 'count']).should('eq', 0)
 
