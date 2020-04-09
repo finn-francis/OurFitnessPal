@@ -1,19 +1,20 @@
 import React from "react";
+import Alert from 'react-bootstrap/Alert'
 import { Link } from "react-router-dom";
 import { defaultHeaders } from "../../../utils/request";
 
 class New extends React.Component {
   constructor(props){
     super(props);
-    this.initialState = {
+    this.state = {
       name: "",
       description: "",
       errors: {
         name: [],
         description: []
-      }
+      },
+      success: false
     };
-    this.state = this.initialState
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -61,14 +62,27 @@ class New extends React.Component {
             errors: response.data
           })
         } else {
-          this.setState(this.initialState)
+          this.setState({
+            name: "",
+            description: "",
+            errors: {
+              name: [],
+              description: []
+            },
+            success: true
+          });
         }
       })
   }
 
   render() {
+    const alert = <Alert variant={'success'} dismissible onClose={() => this.setState({success: false})}>
+                    Exercise created
+                  </Alert>
+
     return (
       <div className="container mt-5">
+        { this.state.success ? alert : '' }
         <div className="row">
           <div className="col-sm-12 col-lg-6 offset-lg-3">
             <h1 className="font-weight-normal mb-5">
