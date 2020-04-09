@@ -78,9 +78,9 @@ describe 'get /api/v1/exercises', type: :request do
       it 'responds with the new record as JSON' do
         exercise = Exercise.last
         parsed_response = JSON.parse(response.body)
-        expect(parsed_response['id']).to eq exercise.id
-        expect(parsed_response['name']).to eq exercise.name
-        expect(parsed_response['description']).to eq exercise.description
+        expect(parsed_response['data']['id']).to eq exercise.id
+        expect(parsed_response['data']['name']).to eq exercise.name
+        expect(parsed_response['data']['description']).to eq exercise.description
       end
     end
 
@@ -98,7 +98,7 @@ describe 'get /api/v1/exercises', type: :request do
 
       it 'returns an error message' do
         parsed_response = JSON.parse(response.body)
-        expect(parsed_response['name']).to eq ['can\'t be blank']
+        expect(parsed_response['data']['name']).to eq ['can\'t be blank']
       end
     end
   end
