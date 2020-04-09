@@ -32,7 +32,6 @@ describe('New', () => {
 
   describe('onChange', function() {
     let container
-    let onChangeSpy
 
     beforeEach(() => {
       container = shallow(<New/>);
