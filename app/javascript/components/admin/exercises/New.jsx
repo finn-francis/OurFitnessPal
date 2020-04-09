@@ -5,10 +5,15 @@ import { defaultHeaders } from "../../../utils/request";
 class New extends React.Component {
   constructor(props){
     super(props);
-    this.state = {
+    this.initialState = {
       name: "",
-      description: ""
-    }
+      description: "",
+      errors: {
+        name: [],
+        description: []
+      }
+    };
+    this.state = this.initialState
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -49,7 +54,16 @@ class New extends React.Component {
         }
         throw new Error("Network response was not ok.");
       })
-      .catch(error => console.log(error.message));
+      .catch(error => console.log(error.message))
+      .then(response => {
+        if (response.error) {
+          this.setState({
+            errors: response.data
+          })
+        } else {
+          this.setState(this.initialState)
+        }
+      })
   }
 
   render() {
@@ -63,6 +77,7 @@ class New extends React.Component {
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <label htmlFor="exerciseName">Exercise name</label>
+                <label className="ml-1">{this.state.errors.name.join(', ')}</label>
                 <input
                   type="text"
                   name="name"
@@ -70,6 +85,7 @@ class New extends React.Component {
                   className="form-control"
                   required
                   onChange={this.onChange}
+                  value={this.state.name}
                 />
               </div>
               <label htmlFor="description">Description</label>
@@ -78,8 +94,8 @@ class New extends React.Component {
                 id="description"
                 name="description"
                 rows="5"
-                required
                 onChange={this.onChange}
+                value={this.state.description}
               />
               <button type="submit" className="btn submit-button custom-button mt-3">
                 Create Exercise

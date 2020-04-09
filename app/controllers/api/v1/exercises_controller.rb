@@ -15,9 +15,9 @@ module Api
         exercise = Exercise.new(exercise_params)
         if exercise.valid?
           exercise.save
-          render json: exercise
+          render json: { data: exercise, error: false }
         else
-          render json: exercise.errors
+          render json: { data: exercise.errors, error: true }
         end
       end
 
