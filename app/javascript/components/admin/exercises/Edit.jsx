@@ -18,7 +18,6 @@ class Edit extends React.Component {
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.stripHtmlEntities = this.stripHtmlEntities.bind(this);
   }
 
   componentDidMount() {
@@ -37,12 +36,6 @@ class Edit extends React.Component {
         throw new Error("Network response was not ok.");
       })
       .then(response => this.setState({ name: response.name, description: response.description }));
-  }
-
-  stripHtmlEntities(str) {
-    return String(str)
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;");
   }
 
   onChange(event) {
