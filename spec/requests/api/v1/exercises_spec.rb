@@ -52,7 +52,7 @@ describe 'get /api/v1/exercises', type: :request do
         @exercise_json = @exercise.to_json
       end
 
-      it 'responds with an all exercises ordered by name' do
+      it 'responds with the exercise data' do
         get "#{url}#{@exercise.id}"
         expect(response).to have_http_status('200')
         expect(response.body).to eq @exercise_json
