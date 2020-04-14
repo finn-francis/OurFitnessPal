@@ -101,5 +101,30 @@ describe 'get /api/v1/exercises', type: :request do
         expect(parsed_response['data']['name']).to eq ['can\'t be blank']
       end
     end
+
+    describe '#edit' do
+      let(:url) { '/api/v1/exercises/:id/edit' }
+
+      context 'there is no exercise with the provided id' do
+        it 'responds with a record not found error' do
+          get url.gsub(':id', '0')
+          expect(response).to have_http_status('200')
+          expect(response.body).to eq 'Record not found'
+        end
+      end
+
+      context 'there is an exercise with the provided id' do
+        before do
+          @exercise = create(:exercise)
+          @exercise_json = @exercise.to_json
+        end
+
+        it 'responds with the exercise data' do
+          get url.gsub(':id', @exercise.id.to_s)
+          expect(response).to have_http_status('200')
+          expect(response.body).to eq @exercise_json
+        end
+      end
+    end
   end
 end

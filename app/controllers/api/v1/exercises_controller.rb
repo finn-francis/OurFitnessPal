@@ -21,6 +21,10 @@ module Api
         end
       end
 
+      def edit
+        render json: find_exercise
+      end
+
       private
 
       def find_exercise
