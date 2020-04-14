@@ -25,6 +25,15 @@ module Api
         render json: find_exercise
       end
 
+      def update
+        find_exercise
+        if @exercise.update(exercise_params)
+          render json: { data: @exercise, error: false }
+        else
+          render json: { data: @exercise.errors, error: true }
+        end
+      end
+
       private
 
       def find_exercise

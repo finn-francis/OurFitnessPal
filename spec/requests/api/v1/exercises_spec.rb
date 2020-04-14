@@ -126,5 +126,31 @@ describe 'get /api/v1/exercises', type: :request do
         end
       end
     end
+
+    describe '#update' do
+      let(:url) { '/api/v1/exercises/' }
+
+      context 'with valid params' do
+        before do
+          @exercise = create(:exercise)
+          @initial_exercise_count = Exercise.count
+          params = { exercise: { name: Faker::Name.name, description: Faker::Lorem.paragraph } }
+          put "#{url}#{@exercise.id}", params: params
+        end
+
+        it 'updates the record' do
+          expect(response).to have_http_status('200')
+          expect(Exercise.count).to eq(@initial_exercise_count)
+        end
+
+        it 'responds with the updated record as JSON' do
+          @exercise.reload
+          parsed_response = JSON.parse(response.body)
+          expect(parsed_response['data']['id']).to eq @exercise.id
+          expect(parsed_response['data']['name']).to eq @exercise.name
+          expect(parsed_response['data']['description']).to eq @exercise.description
+        end
+      end
+    end
   end
 end
