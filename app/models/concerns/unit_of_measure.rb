@@ -37,10 +37,20 @@ module UnitOfMeasure
       ALL[exercise_unit_name].find { |unit| unit[:storage_default] }
     end
 
-    def convertable_to(exercise_unit_name)
-      exercise_unit_name = exercise_unit_name.to_sym
+    def unit_for(unit_of_measure)
+      unit_of_measure = unit_of_measure.to_sym
+
+      result = nil
+      ALL.each do |_exercise_unit, units|
+        break if (result = units.find { |unit| unit[:key] == unit_of_measure })
+      end
+      result
+    end
+
+    def convertable_to(unit_of_measure)
+      unit_of_measure = unit_of_measure.to_sym
       units_of_measure = ALL.select do |_exercise_unit, units|
-        units.any? { |unit| unit[:key] == exercise_unit_name }
+        units.any? { |unit| unit[:key] == unit_of_measure }
       end.values.first
 
       units_of_measure.map { |unit| { key: unit[:key], name: unit[:name] } }

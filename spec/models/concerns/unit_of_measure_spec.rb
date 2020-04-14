@@ -13,7 +13,18 @@ describe UnitOfMeasure do
       expect(described_class.stored_unit_for('time')).to eq({ key: :ms, name: 'milisecond', storage_default: true })
       expect(described_class.stored_unit_for('reps')).to eq({ key: :reps, name: 'rep', storage_default: true })
       expect(described_class.stored_unit_for('distance')).to eq({ key: :mm, name: 'millimeter', storage_default: true })
-      expect(described_class.stored_unit_for('speed')).to eq({ key: :mh, name: 'meters per hour', storage_default: true })
+      expect(described_class.stored_unit_for('speed')).to eq({ key: :mh, name: 'meters per hour',
+                                                               storage_default: true })
+    end
+  end
+
+  describe '#unit_for' do
+    it 'should return the hash for the given unit' do
+      expect(described_class.unit_for('g')).to eq({ key: :g, name: 'gram', storage_default: true })
+      expect(described_class.unit_for('ms')).to eq({ key: :ms, name: 'milisecond', storage_default: true })
+      expect(described_class.unit_for('reps')).to eq({ key: :reps, name: 'rep', storage_default: true })
+      expect(described_class.unit_for('mm')).to eq({ key: :mm, name: 'millimeter', storage_default: true })
+      expect(described_class.unit_for('mh')).to eq({ key: :mh, name: 'meters per hour', storage_default: true })
     end
   end
 
