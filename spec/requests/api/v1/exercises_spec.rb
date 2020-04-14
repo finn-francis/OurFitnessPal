@@ -52,7 +52,7 @@ describe 'get /api/v1/exercises', type: :request do
         @exercise_json = @exercise.to_json
       end
 
-      it 'responds with an all exercises ordered by name' do
+      it 'responds with the exercise data' do
         get "#{url}#{@exercise.id}"
         expect(response).to have_http_status('200')
         expect(response.body).to eq @exercise_json
@@ -99,6 +99,60 @@ describe 'get /api/v1/exercises', type: :request do
       it 'returns an error message' do
         parsed_response = JSON.parse(response.body)
         expect(parsed_response['data']['name']).to eq ['can\'t be blank']
+      end
+    end
+
+    describe '#edit' do
+      let(:url) { '/api/v1/exercises/:id/edit' }
+
+      context 'there is no exercise with the provided id' do
+        it 'responds with a record not found error' do
+          get url.gsub(':id', '0')
+          expect(response).to have_http_status('200')
+          expect(response.body).to eq 'Record not found'
+        end
+      end
+
+      context 'there is an exercise with the provided id' do
+        before do
+          @exercise = create(:exercise)
+          @exercise_json = @exercise.to_json
+        end
+
+        it 'responds with the exercise data' do
+          get url.gsub(':id', @exercise.id.to_s)
+          expect(response).to have_http_status('200')
+          expect(response.body).to eq @exercise_json
+        end
+      end
+    end
+
+    describe '#update' do
+      let(:url) { '/api/v1/exercises/' }
+
+      context 'with valid params' do
+        before do
+          @exercise = create(:exercise)
+          @initial_exercise_count = Exercise.count
+          params = { exercise: { name: @name = Faker::Name.name, description: @description = Faker::Lorem.paragraph } }
+          put "#{url}#{@exercise.id}", params: params
+        end
+
+        it 'updates the record' do
+          expect(response).to have_http_status('200')
+          expect(Exercise.count).to eq(@initial_exercise_count)
+          @exercise.reload
+          expect(@exercise.name).to eq @name
+          expect(@exercise.description).to eq @description
+        end
+
+        it 'responds with the updated record as JSON' do
+          @exercise.reload
+          parsed_response = JSON.parse(response.body)
+          expect(parsed_response['data']['id']).to eq @exercise.id
+          expect(parsed_response['data']['name']).to eq @exercise.name
+          expect(parsed_response['data']['description']).to eq @exercise.description
+        end
       end
     end
   end

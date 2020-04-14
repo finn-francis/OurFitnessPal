@@ -2,14 +2,7 @@ describe('Exercise new', () => {
   beforeEach(() => {
     cy.app('clean')
     cy.ar_command(['Exercise', 'count']).should('eq', 0)
-    cy.appFactories([
-      ['create', 'user', { email: 'user@email.com' }]
-    ])
-    cy.visit('/login')
-    cy.get('#email').type('user@email.com')
-    cy.get('#password').type('password')
-    cy.get('form button').click()
-    cy.url().should('eq', 'http://localhost:5002/')
+    cy.login()
     cy.visit('/admin/exercises/new')
   })
 

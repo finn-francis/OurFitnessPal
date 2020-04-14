@@ -1,14 +1,7 @@
 describe('Exercise index', () => {
   beforeEach(() => {
     cy.app('clean')
-    cy.appFactories([
-      ['create', 'user', { email: 'user@email.com' }]
-    ])
-    cy.visit('/login')
-    cy.get('#email').type('user@email.com')
-    cy.get('#password').type('password')
-    cy.get('form button').click()
-    cy.url().should('eq', 'http://localhost:5002/')
+    cy.login()
   })
 
   afterEach(() => {
