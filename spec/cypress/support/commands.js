@@ -29,3 +29,14 @@
 Cypress.Commands.add('ar_command', (model) => {
   return cy.app('ar_command', model)
 });
+
+Cypress.Commands.add('login', () => {
+  cy.appFactories([
+    ['create', 'user', { email: 'user@email.com' }]
+  ])
+  cy.visit('/login')
+  cy.get('#email').type('user@email.com')
+  cy.get('#password').type('password')
+  cy.get('form button').click()
+  cy.url().should('eq', 'http://localhost:5002/')
+})
