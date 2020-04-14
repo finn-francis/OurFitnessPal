@@ -7,24 +7,35 @@ describe UnitOfMeasure do
     units.map { |unit| unit[key] }
   end
 
+  describe UnitOfMeasure::Unit do
+    it 'should accept a hash of options and set them as attributes' do
+      instance = described_class.new({ key: :g, name: 'gram', storage_default: true })
+      expect(instance.key).to eq(:g)
+      expect(instance.name).to eq('gram')
+      expect(instance.storage_default).to eq(true)
+    end
+  end
+
   describe '#stored_unit_for' do
     it 'should return the default stored unit of measure for the provided exercise unit' do
-      expect(described_class.stored_unit_for('weight')).to eq({ key: :g, name: 'gram', storage_default: true })
-      expect(described_class.stored_unit_for('time')).to eq({ key: :ms, name: 'milisecond', storage_default: true })
-      expect(described_class.stored_unit_for('reps')).to eq({ key: :reps, name: 'rep', storage_default: true })
-      expect(described_class.stored_unit_for('distance')).to eq({ key: :mm, name: 'millimeter', storage_default: true })
-      expect(described_class.stored_unit_for('speed')).to eq({ key: :mh, name: 'meters per hour',
-                                                               storage_default: true })
+      expect(described_class.stored_unit_for('weight').to_h).to eq({ key: :g, name: 'gram', storage_default: true })
+      expect(described_class.stored_unit_for('time').to_h).to eq({ key: :ms, name: 'milisecond',
+                                                                   storage_default: true })
+      expect(described_class.stored_unit_for('reps').to_h).to eq({ key: :reps, name: 'rep', storage_default: true })
+      expect(described_class.stored_unit_for('distance').to_h).to eq({ key: :mm, name: 'millimeter',
+                                                                       storage_default: true })
+      expect(described_class.stored_unit_for('speed').to_h).to eq({ key: :mh, name: 'meters per hour',
+                                                                    storage_default: true })
     end
   end
 
   describe '#unit_for' do
-    it 'should return the hash for the given unit' do
-      expect(described_class.unit_for('g')).to eq({ key: :g, name: 'gram', storage_default: true })
-      expect(described_class.unit_for('ms')).to eq({ key: :ms, name: 'milisecond', storage_default: true })
-      expect(described_class.unit_for('reps')).to eq({ key: :reps, name: 'rep', storage_default: true })
-      expect(described_class.unit_for('mm')).to eq({ key: :mm, name: 'millimeter', storage_default: true })
-      expect(described_class.unit_for('mh')).to eq({ key: :mh, name: 'meters per hour', storage_default: true })
+    it 'should return the Unit struct for the given unit' do
+      expect(described_class.unit_for('g').to_h).to eq({ key: :g, name: 'gram', storage_default: true })
+      expect(described_class.unit_for('ms').to_h).to eq({ key: :ms, name: 'milisecond', storage_default: true })
+      expect(described_class.unit_for('reps').to_h).to eq({ key: :reps, name: 'rep', storage_default: true })
+      expect(described_class.unit_for('mm').to_h).to eq({ key: :mm, name: 'millimeter', storage_default: true })
+      expect(described_class.unit_for('mh').to_h).to eq({ key: :mh, name: 'meters per hour', storage_default: true })
     end
   end
 

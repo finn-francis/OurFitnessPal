@@ -32,9 +32,15 @@ module UnitOfMeasure
     ]
   }.freeze
 
+  Unit = Struct.new(:key, :name, :storage_default) do
+    def initialize(options)
+      options.each { |k, v| send("#{k}=", v) }
+    end
+  end
+
   class << self
     def stored_unit_for(exercise_unit_name)
-      ALL[exercise_unit_name].find { |unit| unit[:storage_default] }
+      generate_unit(ALL[exercise_unit_name].find { |unit| unit[:storage_default] })
     end
 
     def unit_for(unit_of_measure)
@@ -44,7 +50,7 @@ module UnitOfMeasure
       ALL.each do |_exercise_unit, units|
         break if (result = units.find { |unit| unit[:key] == unit_of_measure })
       end
-      result
+      generate_unit(result)
     end
 
     def convertable_to(unit_of_measure)
@@ -53,7 +59,14 @@ module UnitOfMeasure
         units.any? { |unit| unit[:key] == unit_of_measure }
       end.values.first
 
-      units_of_measure.map { |unit| { key: unit[:key], name: unit[:name] } }
+      # units_of_measure.map { |unit| { key: unit[:key], name: unit[:name] } }
+      generate_unit(units_of_measure)
+    end
+
+    private
+
+    def generate_unit(unit)
+      unit.is_a?(Array) ? unit.map { |u| Unit.new(u) } : Unit.new(unit)
     end
   end
 end
