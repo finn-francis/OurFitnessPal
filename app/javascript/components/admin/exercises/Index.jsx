@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import EditIcon from '@material-ui/icons/Edit';
 
 class Index extends React.Component {
   constructor(props) {
@@ -30,6 +31,9 @@ class Index extends React.Component {
             <h5 className="card-title">{exercise.name}</h5>
             <Link to={`/admin/exercises/${exercise.id}`} className="btn custom-button view-exercise">
               View Exercise
+            </Link>
+            <Link to={`/admin/exercises/${exercise.id}/edit`} className="btn btn-info float-right edit-exercise">
+              <EditIcon/>
             </Link>
           </div>
         </div>
