@@ -134,13 +134,16 @@ describe 'get /api/v1/exercises', type: :request do
         before do
           @exercise = create(:exercise)
           @initial_exercise_count = Exercise.count
-          params = { exercise: { name: Faker::Name.name, description: Faker::Lorem.paragraph } }
+          params = { exercise: { name: @name = Faker::Name.name, description: @description = Faker::Lorem.paragraph } }
           put "#{url}#{@exercise.id}", params: params
         end
 
         it 'updates the record' do
           expect(response).to have_http_status('200')
           expect(Exercise.count).to eq(@initial_exercise_count)
+          @exercise.reload
+          expect(@exercise.name).to eq @name
+          expect(@exercise.description).to eq @description
         end
 
         it 'responds with the updated record as JSON' do
