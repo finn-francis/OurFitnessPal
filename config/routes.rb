@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :exercises, except: :new
       resources :homepage, only: :index
+      resources :sessions, only: :index
     end
   end
   get '/*path' => 'homepage#index'
