@@ -8,6 +8,19 @@ class Index extends Base {
     this.state = { sessions: [] }
   }
 
+  componentDidMount() {
+    const url = "/api/v1/sessions"
+    fetch(url)
+      .then(response => {
+        if (response.ok)
+          return response.json()
+
+        throw new Error("Network response was not ok.")
+      })
+      .then(response => this.setState({ sessions: response }))
+      .catch(error => console.log(error.message))
+  }
+
   sessionList() {
     return (
       this.state.sessions.map((session, index) => (
