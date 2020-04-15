@@ -9,8 +9,8 @@ Rails.application.routes.draw do
                registration: 'api/v1/signup'
              },
              controllers: {
-               sessions: 'api/v1/sessions',
-               registrations: 'api/v1/registrations'
+               sessions: 'api/v1/devise/sessions',
+               registrations: 'api/v1/devise/registrations'
              }
   root 'homepage#index'
   namespace :api do
