@@ -27,7 +27,7 @@ describe 'get /api/v1/exercises', type: :request do
         @exercises = create_list(:exercise, 3).sort_by(&:name).to_json
       end
 
-      it 'responds with an all exercises ordered by name' do
+      it 'responds with all exercises ordered by name' do
         get url
         expect(response).to have_http_status('200')
         expect(response.body).to eq @exercises
