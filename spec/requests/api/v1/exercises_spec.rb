@@ -155,5 +155,47 @@ describe 'get /api/v1/exercises', type: :request do
         end
       end
     end
+
+    describe '#delete' do
+      let(:url) { '/api/v1/exercises/' }
+
+      context 'there is one exercise' do
+        before do
+          @exercise = create(:exercise)
+          @initial_exercise_count = Exercise.count
+          delete "#{url}#{@exercise.id}"
+        end
+
+        it 'deletes the record' do
+          expect(response).to have_http_status('200')
+          expect(Exercise.count).to eq(@initial_exercise_count - 1)
+          expect(Exercise.find_by(id: @exercise.id)).to be_falsey
+        end
+
+        it 'responds with the an empty array' do
+          expect(JSON.parse(response.body)['data']).to eq []
+        end
+      end
+
+      context 'there are multiple exercises' do
+        before do
+          @exercise_list = create_list(:exercise, 3).sort_by(&:name)
+          @exercise = @exercise_list.sample
+          @initial_exercise_count = Exercise.count
+          delete "#{url}#{@exercise.id}"
+        end
+
+        it 'deletes the record' do
+          expect(response).to have_http_status('200')
+          expect(Exercise.count).to eq(@initial_exercise_count - 1)
+          expect(Exercise.find_by(id: @exercise.id)).to be_falsey
+        end
+
+        it 'responds with all remaining exercises ordered by name' do
+          exercises = Exercise.all.order(:name).to_json
+          expect(response.body).to include exercises
+        end
+      end
+    end
   end
 end
