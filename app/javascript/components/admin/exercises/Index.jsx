@@ -24,7 +24,8 @@ class Index extends React.Component {
         }
         throw new Error("Network response was not ok.");
       })
-      .then(response => this.setState({ exercises: response }));
+      .then(response => this.setState({ exercises: response }))
+      .catch(error => console.log(error.message))
   }
 
   deleteExercise(id) {
