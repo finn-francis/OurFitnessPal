@@ -35,6 +35,7 @@ describe('Index', () => {
       expect(container.find('.card-body').length).toEqual(exerciseData.length);
       expect(container.find('.view-exercise').length).toEqual(exerciseData.length);
       expect(container.find('.edit-exercise').length).toEqual(exerciseData.length);
+      expect(container.find('.delete-exercise').length).toEqual(exerciseData.length);
       expect(container.find('.add-exercise').length).toEqual(1);
       expect(container.find('.no-exercises').length).toEqual(0);
     })

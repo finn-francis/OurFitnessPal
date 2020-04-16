@@ -34,6 +34,15 @@ module Api
         end
       end
 
+      def destroy
+        find_exercise
+        if @exercise.destroy
+          render json: { data: Exercise.all.order(:name), error: false }
+        else
+          render json: { data: @exercise, error: true }
+        end
+      end
+
       private
 
       def find_exercise
