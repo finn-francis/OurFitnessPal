@@ -8,6 +8,8 @@ import AdminExercises from './admin/exercises/Index';
 import AdminExercisesShow  from './admin/exercises/Show';
 import AdminExercisesNew  from './admin/exercises/New';
 import AdminExercisesEdit  from './admin/exercises/Edit';
+import SessionsIndex from './main/sessions/Index';
+import SessionsShow from './main/sessions/Show';
 import Login from './devise/sessions/New';
 import Signup from './devise/registrations/New';
 
@@ -18,6 +20,8 @@ const routes = [
   {path: '/admin/exercises/new', component: AdminExercisesNew},
   {path: '/admin/exercises/:id', component: AdminExercisesShow},
   {path: '/admin/exercises/:id/edit', component: AdminExercisesEdit},
+  {path: '/sessions', component: SessionsIndex},
+  {path: '/sessions/:id', component: SessionsShow},
   {path: '/login', component: Login},
   {path: '/signup', component: Signup}
 ]

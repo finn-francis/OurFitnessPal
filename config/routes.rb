@@ -9,18 +9,15 @@ Rails.application.routes.draw do
                registration: 'api/v1/signup'
              },
              controllers: {
-               sessions: 'api/v1/sessions',
-               registrations: 'api/v1/registrations'
+               sessions: 'api/v1/devise/sessions',
+               registrations: 'api/v1/devise/registrations'
              }
-  namespace :api do
-    namespace :v1 do
-      resources :homepage, only: :index
-    end
-  end
   root 'homepage#index'
   namespace :api do
     namespace :v1 do
       resources :exercises, except: :new
+      resources :homepage, only: :index
+      resources :sessions, only: %i[index show]
     end
   end
   get '/*path' => 'homepage#index'

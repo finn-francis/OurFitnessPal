@@ -2,17 +2,19 @@
 
 module Api
   module V1
-    class SessionsController < Devise::SessionsController
-      respond_to :json
+    class SessionsController < ApplicationController
+      def index
+        render json: current_user.sessions.order(:name)
+      end
+
+      def show
+        render json: find_session
+      end
 
       private
 
-      def respond_with(resource, _opts = {})
-        render json: resource
-      end
-
-      def respond_to_on_destroy
-        head :no_content
+      def find_session
+        current_user.sessions.find_by(id: params[:id]) || 'Record not found'
       end
     end
   end

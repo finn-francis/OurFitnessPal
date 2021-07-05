@@ -22,7 +22,8 @@ class Show extends React.Component {
         }
         throw new Error("Network response was not ok.");
       })
-      .then(response => this.setState({ exercise: response }));
+      .then(response => this.setState({ exercise: response }))
+      .catch(error => console.log(error.message))
   }
 
   render() {
